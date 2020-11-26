@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-paging',
@@ -6,6 +6,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./paging.component.css']
 })
 export class PagingComponent implements OnInit {
+
+  @Input() page;
+
+  @Output() newPage = new EventEmitter();
+
+  // Previous page
+  btnPrevPage() {
+    if (this.page > 1) {
+      this.newPage.emit(this.page - 1);
+    }
+  }
+  
+  // Next page
+  btnNextPage() {
+    this.newPage.emit(this.page + 1);
+  }
 
   constructor() { }
 
